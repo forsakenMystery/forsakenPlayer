@@ -5,6 +5,7 @@
  */
 package Initialization;
 
+import Utility.Preference;
 import forsakenplayer.Main;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,11 +29,18 @@ public class Config {
     private static Config c = null;
     private String name = "config.xml";
     private static Properties preferences = new Properties();
-    
+
+    static {
+        File configFile = new File("config.xml");
+        if (!configFile.exists()) {
+            makeFile();
+        }
+    }
+
     public Properties getPreferences() {
         return preferences;
     }
-    
+
     private Config() {
         try {
             File configFile = new File("config.xml");
@@ -42,8 +50,7 @@ public class Config {
             System.out.println("props = " + preferences);
             inputStream.close();
         } catch (FileNotFoundException ex) {
-            // file does not exist
-            makeFile();
+            // file does not exist! can't happen
         } catch (IOException ex) {
             // I/O error
         }
@@ -56,17 +63,23 @@ public class Config {
         return c;
     }
 
-    private void makeFile() {
+    private static void makeFile() {
         try {
             File configFile = new File("config.xml");
             OutputStream outputStream = new FileOutputStream(configFile);
 
             Properties props = new Properties();
-            props.setProperty("AlwaysOnTop", "False");
+            props.setProperty(Preference.X+"", "100");
+            props.setProperty(Preference.Y+"", "100");
+            props.setProperty(Preference.FullScreen+"", "false");
+            props.setProperty(Preference.ForceTop+"", "false");
+            props.setProperty(Preference.Width+"", "640");
+            props.setProperty(Preference.Height+"", "480");
             props.storeToXML(outputStream, "config");
             outputStream.close();
         } catch (IOException ex) {
             // I/O error
         }
     }
+
 }

@@ -2,5 +2,10 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>config</comment>
-<entry key="AlwaysOnTop">False</entry>
+<entry key="X">100.0</entry>
+<entry key="Y">100.0</entry>
+<entry key="ForceTop">false</entry>
+<entry key="Height">480.0</entry>
+<entry key="FullScreen">false</entry>
+<entry key="Width">640.0</entry>
 </properties>
